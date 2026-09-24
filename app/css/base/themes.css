@@ -43,6 +43,11 @@
   /* Heading accents (warm/amber suave para títulos secundarios) */
   --ui-heading-warm: #d4c18d;
 
+  /* Warm brand identity (consistente entre temas) */
+  --ui-warm:        #e8a020;
+  --ui-warm-soft:   #e7b15a;
+  --ui-text-warm:   #fff9e6;
+
   /* Ghost (translúcidos para hover/active) */
   --ui-accent-ghost: rgba(35,231,255,.08);
   --ui-surface-ghost: rgba(128,128,128,.06);
@@ -68,6 +73,9 @@
   --ui-danger: #c83d4b;
   --ui-info: #1974a8;
   --ui-heading-warm: #7a6a42;
+  --ui-warm:        #b8860b;
+  --ui-warm-soft:   #b8860b;
+  --ui-text-warm:   #3a2f1a;
   --ui-accent-ghost: rgba(8,124,167,.09);
   --ui-surface-ghost: rgba(0,0,0,.04);
 }

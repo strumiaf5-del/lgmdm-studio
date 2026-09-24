@@ -1,16 +1,39 @@
 /* ============================================================
-   audio-canvas.css — Componente audio canvas (server-side)
+   audio-canvas.css — Componente audio canvas
    ============================================================
-   Single responsibility: estilos del widget de audio (file input,
-   status, meta, spectrum canvas, progress bar).
-   Estructura: .audio-canvas > (.audio-canvas__header + .audio-canvas__meta + .canvas-host + .audio-canvas__progress)
+   Single responsibility: estilos del widget de audio
+   (file input, status, meta, spectrum canvas, progress bar).
+   Estructura: .audio-canvas > (.audio-canvas__header +
+                  .audio-canvas__meta + .canvas-host > .audio-canvas__spectrum +
+                  .audio-canvas__progress)
+
+   Patrones adoptados del original (dist/components/preview.css):
+   - Container con border warm + shadow (sin RGBA hardcoded)
+   - Status text con mono + 0.18em + warm + text-shadow glow
+   - Spectrum canvas: border warm-soft + gradient bg + 120px height
+   - Progress bar: linear-gradient warm
+
+   Bugs del original NO adoptados:
+   - Selector duplicado (.preview-wrap 2 veces)
+   - 3 hex hardcoded en fallbacks
+   - 8 RGBA hardcoded en sombras/gradients
 */
 
+@keyframes vu-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.45; }
+}
+
 .audio-canvas {
-  padding: var(--space-3);
+  padding: var(--space-4);
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+  background: var(--ui-surface);
+  border: 1px solid color-mix(in srgb, var(--ui-warm) 16%, transparent);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-modal),
+              inset 0 0 0 1px color-mix(in srgb, var(--ui-text) 2%, transparent);
 }
 
 .audio-canvas__header {
@@ -20,9 +43,31 @@
 }
 
 .audio-canvas__status {
-  font-size: var(--text-sm);
-  color: var(--ui-muted);
+  font-size: var(--text-base);
   font-family: var(--font-mono);
+  letter-spacing: 0.18em;
+  color: var(--ui-warn);
+  text-transform: uppercase;
+  text-shadow: 0 0 10px color-mix(in srgb, var(--ui-warm) 18%, transparent);
+}
+
+.audio-canvas__status::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ui-warn);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--ui-warm) 55%, transparent);
+  margin-right: var(--space-2);
+  vertical-align: middle;
+  animation: vu-pulse 0.6s infinite;
+}
+
+.audio-canvas__status--idle::before {
+  background: var(--ui-muted);
+  box-shadow: none;
+  animation: none;
 }
 
 .audio-canvas__meta {
@@ -44,10 +89,13 @@
 
 .audio-canvas__spectrum {
   width: 100%;
-  height: 200px;
+  height: 120px;
   display: block;
-  background: var(--ui-surface);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
+  background: radial-gradient(circle at 50% 8%, color-mix(in srgb, var(--ui-text) 6%, transparent), transparent 18%),
+              linear-gradient(180deg, color-mix(in srgb, var(--ui-text) 3%, transparent), color-mix(in srgb, var(--ui-bg) 96%, transparent));
+  border: 1px solid color-mix(in srgb, var(--ui-warm-soft) 16%, transparent);
+  box-shadow: inset 0 0 18px color-mix(in srgb, var(--ui-text) 3%, transparent);
 }
 
 .audio-canvas__progress {
@@ -60,6 +108,6 @@
 .audio-canvas__progress-bar {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, var(--ui-accent), var(--ui-accent-2));
+  background: linear-gradient(90deg, var(--ui-warm), var(--ui-warm-soft));
   transition: width var(--t-fast);
 }
