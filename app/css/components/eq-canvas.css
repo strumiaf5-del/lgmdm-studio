@@ -1,0 +1,32 @@
+/* ============================================================
+   eq-canvas.css — Componente EQ visualizer
+   ============================================================
+   Single responsibility: estilos del widget de EQ analyzer
+   (título + canvas con escala log de frecuencia).
+   Estructura: .eq-canvas > .eq-canvas__title + .canvas-host > .eq-canvas__spectrum
+*/
+
+.eq-canvas {
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.eq-canvas__title {
+  margin: 0;
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--ui-text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.eq-canvas__spectrum {
+  width: 100%;
+  height: 240px;
+  display: block;
+  background: var(--ui-surface);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--radius-md);
+}
