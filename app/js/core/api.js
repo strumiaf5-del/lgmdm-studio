@@ -15,7 +15,8 @@ function fullUrl(path) {
 
 function buildHeaders(extra = {}) {
   const headers = { ...extra };
-  if (!headers['Content-Type'] && extra.body) {
+  const isFormData = extra.body instanceof FormData;
+  if (!headers['Content-Type'] && extra.body && !isFormData) {
     headers['Content-Type'] = 'application/json';
   }
   const token = ss.get('master_auth_token');

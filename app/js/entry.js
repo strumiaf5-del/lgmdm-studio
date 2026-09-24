@@ -9,11 +9,13 @@ import { initSession } from './features/auth/session.js';
 import { initSidebarTabs } from './features/sidebar/tabs.js';
 import { initSidebarResize } from './features/sidebar/resize.js';
 import { initThemeSwitcher } from './features/theme/switcher.js';
+import { initAudioCanvas } from './features/canvas/audio.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  if (!initSession()) return; // no autenticado → redirigido a login
+  if (!initSession()) return;
   initSidebarTabs();
   initSidebarResize();
   initThemeSwitcher();
-  console.log('[LGMDM] Phase 2 ready: auth + sidebar + theme.');
+  initAudioCanvas();
+  console.log('[LGMDM] Phase 2 ready: auth + sidebar + theme + audio canvas.');
 });

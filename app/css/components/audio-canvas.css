@@ -1,0 +1,65 @@
+/* ============================================================
+   audio-canvas.css — Componente audio canvas (server-side)
+   ============================================================
+   Single responsibility: estilos del widget de audio (file input,
+   status, meta, spectrum canvas, progress bar).
+   Estructura: .audio-canvas > (.audio-canvas__header + .audio-canvas__meta + .canvas-host + .audio-canvas__progress)
+*/
+
+.audio-canvas {
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.audio-canvas__header {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.audio-canvas__status {
+  font-size: var(--text-sm);
+  color: var(--ui-muted);
+  font-family: var(--font-mono);
+}
+
+.audio-canvas__meta {
+  display: flex;
+  gap: var(--space-4);
+  font-size: var(--text-xs);
+  color: var(--ui-muted);
+  font-family: var(--font-mono);
+}
+
+.audio-canvas__duration {
+  color: var(--ui-text);
+}
+
+.audio-canvas__source-id {
+  color: var(--ui-faint);
+  font-size: 0.7rem;
+}
+
+.audio-canvas__spectrum {
+  width: 100%;
+  height: 200px;
+  display: block;
+  background: var(--ui-surface);
+  border-radius: var(--radius-md);
+}
+
+.audio-canvas__progress {
+  height: 4px;
+  background: var(--ui-surface-2);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.audio-canvas__progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--ui-accent), var(--ui-accent-2));
+  transition: width var(--t-fast);
+}
