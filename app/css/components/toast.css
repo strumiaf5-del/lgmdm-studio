@@ -22,8 +22,8 @@
   border-radius: var(--radius-md);
   font-size: var(--text-sm);
   font-weight: 600;
-  min-width: 240px;
-  max-width: 420px;
+  min-width: var(--toast-min-w);
+  max-width: var(--toast-max-w);
   box-shadow: var(--shadow-lg);
   animation: toast-in var(--t-med) ease-out;
   pointer-events: auto;
@@ -31,7 +31,7 @@
 }
 
 .toast--leave {
-  animation: toast-out 300ms ease-in forwards;
+  animation: toast-out var(--t-fast) ease-in forwards;
 }
 
 .toast--success {

@@ -29,6 +29,8 @@
   --lg-form-textarea-min-h:     5rem;
   --lg-auth-container-max-w:    420px;
   --lg-brand-mark-size:         36px;
+  --lg-toast-min-w:             240px;
+  --lg-toast-max-w:             420px;
 
   --header-h:                   var(--lg-header-h);
   --sidebar-w:                  var(--lg-sidebar-w);
@@ -41,6 +43,8 @@
   --form-textarea-min-h:        var(--lg-form-textarea-min-h);
   --auth-container-max-w:       var(--lg-auth-container-max-w);
   --brand-mark-size:            var(--lg-brand-mark-size);
+  --toast-min-w:                var(--lg-toast-min-w);
+  --toast-max-w:                var(--lg-toast-max-w);
 
   /* ── Spacing scale (sin huecos: 4, 8, 12, 16, 20, 24, 32, 48, 64) ── */
   --space-1: 0.25rem;  /*  4px */
