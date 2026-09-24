@@ -26,6 +26,7 @@
   --lg-btn-icon-size:  34px;
   --lg-topbar-logo-size:        32px;
   --lg-topbar-user-name-max-w:  130px;
+  --lg-form-textarea-min-h:     5rem;
 
   --header-h:                   var(--lg-header-h);
   --sidebar-w:                  var(--lg-sidebar-w);
@@ -35,6 +36,7 @@
   --btn-icon-size:              var(--lg-btn-icon-size);
   --topbar-logo-size:           var(--lg-topbar-logo-size);
   --topbar-user-name-max-w:     var(--lg-topbar-user-name-max-w);
+  --form-textarea-min-h:        var(--lg-form-textarea-min-h);
 
   /* ── Spacing scale (sin huecos: 4, 8, 12, 16, 20, 24, 32, 48, 64) ── */
   --space-1: 0.25rem;  /*  4px */

@@ -13,7 +13,7 @@
    crear archivo propio (ej: canvas.css, upload.css).
 */
 
-/* ── Inputs base ────────────────────────────────────────── */
+/* ── Inputs base + textarea + select (consolidado DRY) ─── */
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -21,33 +21,7 @@ input[type="number"],
 input[type="search"],
 input[type="url"],
 input[type="tel"],
-textarea {
-  width: 100%;
-  padding: var(--space-2) var(--space-3);
-  font-family: var(--font-display);
-  font-size: var(--text-sm);
-  color: var(--ui-text);
-  background: var(--ui-surface-2);
-  border: 1px solid var(--ui-border);
-  border-radius: var(--radius-md);
-  transition: border-color var(--t-fast), background var(--t-fast);
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-  border-color: var(--ui-accent);
-  background: var(--ui-surface);
-}
-
-/* ── Textarea ───────────────────────────────────────────── */
-textarea {
-  resize: vertical;
-  min-height: 5rem;
-  font-family: var(--font-display);
-}
-
-/* ── Select ─────────────────────────────────────────────── */
+textarea,
 select {
   width: 100%;
   padding: var(--space-2) var(--space-3);
@@ -57,8 +31,29 @@ select {
   background: var(--ui-surface-2);
   border: 1px solid var(--ui-border);
   border-radius: var(--radius-md);
+  transition:
+    border-color var(--t-fast),
+    background var(--t-fast),
+    box-shadow var(--t-fast);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--ui-accent);
+  background: var(--ui-surface);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ui-accent) 18%, transparent);
+}
+
+select {
   cursor: pointer;
-  transition: border-color var(--t-fast), background var(--t-fast);
+}
+
+/* ── Textarea ───────────────────────────────────────────── */
+textarea {
+  resize: vertical;
+  min-height: var(--form-textarea-min-h);
+  font-family: var(--font-display);
 }
 
 /* ── Labels ─────────────────────────────────────────────── */
