@@ -6,7 +6,7 @@
    Si hay token → popula el user bar + wire logout.
 */
 
-import { $, byId } from '../../core/dom.js';
+import { $ } from '../../core/dom.js';
 import { ss } from '../../core/storage.js';
 
 const TOKEN_KEY = 'master_auth_token';
