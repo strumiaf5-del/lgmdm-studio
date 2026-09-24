@@ -1,0 +1,105 @@
+/* ============================================================
+   shell.css — Layout del app shell
+   ============================================================
+   Single source of geometry for the shell.
+   Define la estructura: topbar + sidebar + resize-handle + main.
+*/
+
+/* ── App shell (root grid) ─────────────────────────────── */
+.app-shell {
+  display: grid;
+  grid-template-rows: var(--header-h) 1fr;
+  grid-template-columns: var(--sidebar-w) var(--handle-w) 1fr;
+  height: 100dvh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.app-shell > .topbar { grid-row: 1; grid-column: 1 / -1; }
+.app-shell > .sidebar { grid-row: 2; grid-column: 1; }
+.app-shell > .resize-handle { grid-row: 2; grid-column: 2; }
+.app-shell > .main { grid-row: 2; grid-column: 3; }
+
+/* ── Resize handle (drag to resize sidebar) ────────────── */
+.resize-handle {
+  background: var(--ui-border);
+  cursor: col-resize;
+  position: relative;
+  transition: background var(--t-fast);
+}
+
+.resize-handle:hover,
+.resize-handle:active {
+  background: var(--ui-accent);
+}
+
+.resize-handle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 12px;
+  left: -4px;
+}
+
+/* ── Responsive: tablet (959px) ──────────────────────── */
+@media (max-width: 959px) {
+  :root {
+    --lg-sidebar-min-w: 0px;
+    --lg-sidebar-w: 100%;
+    --lg-sidebar-max-w: 100%;
+  }
+
+  .app-shell {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    overflow: auto;
+  }
+
+  .app-shell > .sidebar {
+    grid-row: 1;
+    grid-column: 1;
+    width: 100%;
+    height: auto;
+    max-height: min(45vh, 420px);
+    border-right: 0;
+    border-bottom: 1px solid var(--ui-border);
+  }
+
+  .app-shell > .resize-handle {
+    display: none;
+  }
+
+  .app-shell > .main {
+    grid-row: 2;
+    grid-column: 1;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 8px;
+  }
+}
+
+/* ── Responsive: small (700px) ───────────────────────── */
+@media (max-width: 700px) {
+  .app-shell > .sidebar {
+    max-height: 42dvh;
+    overflow-y: auto;
+  }
+  .app-shell > .main {
+    min-height: 58dvh;
+  }
+}
+
+/* ── Responsive: mobile (480px) ──────────────────────── */
+@media (max-width: 480px) {
+  .app-shell > .main {
+    padding: 6px;
+  }
+}
+
+/* ── Responsive: short height (820px) ─────────────────── */
+@media (max-height: 820px) and (min-width: 960px) {
+  .app-shell > .main {
+    padding-block: 6px;
+  }
+}

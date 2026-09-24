@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0a14">
+  <title>Acceso · LGMDM Studio</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/_index.css">
+</head>
+<body>
+  <main class="auth-container">
+    <div class="auth-card">
+
+      <div class="brand-header">
+        <div class="brand-logo">
+          <span class="brand-logo__mark" aria-hidden="true">LG</span>
+          <span class="brand-logo__name">LGMDM</span>
+        </div>
+        <span class="brand-subtitle">INTELLIGENT MASTERING CONSOLE</span>
+      </div>
+
+      <div class="auth-tabs" role="tablist" aria-label="Tipo de acceso">
+        <button class="auth-tab auth-tab--active" id="tab-login" type="button" role="tab" aria-selected="true" aria-controls="form-login">Iniciar sesión</button>
+        <button class="auth-tab" id="tab-register" type="button" role="tab" aria-selected="false" aria-controls="form-register">Registrarse</button>
+      </div>
+
+      <div id="form-login" class="auth-form" role="tabpanel" aria-labelledby="tab-login">
+        <form id="form-login-real" novalidate>
+          <div class="form-group">
+            <label for="login-email">Correo electrónico</label>
+            <input type="email" id="login-email" placeholder="tu@email.com" autocomplete="email" required autofocus>
+          </div>
+          <div class="form-group">
+            <label for="login-pwd">Contraseña</label>
+            <input type="password" id="login-pwd" placeholder="••••••••" autocomplete="current-password" required>
+          </div>
+          <button type="submit" class="btn btn--primary" id="login-btn">Ingresar a la consola</button>
+          <div id="login-msg" class="auth-msg hidden" role="alert"></div>
+        </form>
+      </div>
+
+      <div id="form-register" class="auth-form hidden" role="tabpanel" aria-labelledby="tab-register">
+        <form id="form-register-real" novalidate>
+          <div class="form-group">
+            <label for="reg-name">Nombre completo</label>
+            <input type="text" id="reg-name" placeholder="Tu nombre" autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="reg-email">Correo electrónico</label>
+            <input type="email" id="reg-email" placeholder="tu@email.com" autocomplete="email" required>
+          </div>
+          <div class="form-group">
+            <label for="reg-pwd">Contraseña</label>
+            <input type="password" id="reg-pwd" placeholder="Mínimo 8 caracteres" autocomplete="new-password" required minlength="8">
+          </div>
+          <button type="submit" class="btn btn--primary" id="register-btn">Crear cuenta</button>
+          <div id="reg-msg" class="auth-msg hidden" role="alert"></div>
+        </form>
+      </div>
+
+      <p class="auth-footer">LGMDM v1.0 · Plataforma privada de masterización</p>
+
+    </div>
+  </main>
+
+  <script type="module" src="js/features/auth/login.js"></script>
+</body>
+</html>

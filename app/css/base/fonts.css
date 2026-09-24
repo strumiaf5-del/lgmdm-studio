@@ -1,0 +1,58 @@
+/* ============================================================
+   fonts.css — Tipografía base
+   ============================================================
+   Single responsibility: estilos tipográficos base.
+   - Headings h1-h6 (sizes + weights + line-height)
+   - Font utilities (.text-mono, .text-display)
+   - Color text utilities (.text-muted, .text-accent, etc.)
+   - Selección de texto
+
+   Carga: DESPUÉS de tokens.css y themes.css (los necesita).
+   Las definiciones de las FAMILIAS (--font-display, --font-mono)
+   viven en tokens.css. Acá solo definimos reglas de uso.
+*/
+
+/* ── Headings ───────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  color: var(--ui-text);
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--text-2xl); letter-spacing: -0.01em; }
+h2 { font-size: var(--text-xl); }
+h3 { font-size: var(--text-lg); }
+h4 { font-size: var(--text-md); }
+h5 { font-size: var(--text-base); }
+h6 { font-size: var(--text-sm); color: var(--ui-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* ── Paragraphs ─────────────────────────────────────────── */
+p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Selection ──────────────────────────────────────────── */
+::selection {
+  background: var(--ui-accent-ghost);
+  color: var(--ui-text);
+}
+
+/* ── Font-family utilities ──────────────────────────────── */
+.text-mono    { font-family: var(--font-mono); }
+.text-display { font-family: var(--font-display); }
+
+/* ── Color text utilities ───────────────────────────────── */
+.text-muted   { color: var(--ui-muted); }
+.text-accent  { color: var(--ui-accent); }
+.text-warn    { color: var(--ui-warn); }
+.text-danger  { color: var(--ui-danger); }
+.text-good    { color: var(--ui-good); }
+
+/* ── Text alignment utilities ───────────────────────────── */
+.text-center  { text-align: center; }
+.text-right   { text-align: right; }

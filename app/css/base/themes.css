@@ -1,0 +1,69 @@
+/* ============================================================
+   themes.css — Sistema canónico de colores por tema
+   ============================================================
+   Single responsibility: definir TODOS los tokens --ui-* (colors).
+   Themes disponibles (data-theme="..."):
+     - (default = dark studio)
+     - light
+
+   Carga: DESPUÉS de tokens.css.
+   Todos los componentes referencian estos tokens con var(--ui-*).
+   No usar hex/rgb en otros archivos — siempre via var.
+*/
+
+:root {
+  /* Backgrounds (del más profundo al elevado) */
+  --ui-bg: #070812;
+  --ui-surface: #0d1220;
+  --ui-surface-2: #12182a;
+  --ui-surface-3: #1a2340;
+  --ui-panel: rgba(255,255,255,.038);
+  --ui-panel-strong: rgba(255,255,255,.06);
+
+  /* Borders */
+  --ui-border: rgba(155,92,255,.18);
+  --ui-border-strong: rgba(35,231,255,.32);
+
+  /* Text (del más fuerte al más débil) */
+  --ui-text: #f4f7ff;
+  --ui-text-soft: #c4ccda;
+  --ui-muted: #8995b0;
+  --ui-faint: #9aa4ba;
+
+  /* Accents */
+  --ui-accent: #23e7ff;
+  --ui-accent-2: #9b5cff;
+
+  /* Semantic (good/warn/danger/info) */
+  --ui-good: #45f6b2;
+  --ui-warn: #ffbd4a;
+  --ui-danger: #ff4264;
+  --ui-info: #4dc4ff;
+
+  /* Ghost (translúcidos para hover/active) */
+  --ui-accent-ghost: rgba(35,231,255,.08);
+  --ui-surface-ghost: rgba(128,128,128,.06);
+}
+
+:root[data-theme="light"] {
+  --ui-bg: #f3f5f7;
+  --ui-surface: #ffffff;
+  --ui-surface-2: #e9eef2;
+  --ui-surface-3: #dce4ea;
+  --ui-panel: rgba(0,0,0,.035);
+  --ui-panel-strong: rgba(0,0,0,.065);
+  --ui-border: rgba(18,32,44,.12);
+  --ui-border-strong: rgba(6,126,168,.30);
+  --ui-text: #16212b;
+  --ui-text-soft: #42515d;
+  --ui-muted: #677784;
+  --ui-faint: #5a6b78;
+  --ui-accent: #087ca7;
+  --ui-accent-2: #5558bb;
+  --ui-good: #18885e;
+  --ui-warn: #b56b00;
+  --ui-danger: #c83d4b;
+  --ui-info: #1974a8;
+  --ui-accent-ghost: rgba(8,124,167,.09);
+  --ui-surface-ghost: rgba(0,0,0,.04);
+}

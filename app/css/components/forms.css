@@ -1,0 +1,92 @@
+/* ============================================================
+   forms.css — Componente form (genérico)
+   ============================================================
+   Single responsibility: estilos genéricos de form.
+   - Inputs (text/email/password/number/search/url/tel)
+   - Textareas
+   - Selects
+   - Labels
+   - Layout (.form-group, .form-row)
+   - Help text (.form-help)
+
+   Para estilos específicos de features (sliders, drop-zone, checkboxes),
+   crear archivo propio (ej: canvas.css, upload.css).
+*/
+
+/* ── Inputs base ────────────────────────────────────────── */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="search"],
+input[type="url"],
+input[type="tel"],
+textarea {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  color: var(--ui-text);
+  background: var(--ui-surface-2);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--t-fast), background var(--t-fast);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--ui-accent);
+  background: var(--ui-surface);
+}
+
+/* ── Textarea ───────────────────────────────────────────── */
+textarea {
+  resize: vertical;
+  min-height: 5rem;
+  font-family: var(--font-display);
+}
+
+/* ── Select ─────────────────────────────────────────────── */
+select {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  color: var(--ui-text);
+  background: var(--ui-surface-2);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color var(--t-fast), background var(--t-fast);
+}
+
+/* ── Labels ─────────────────────────────────────────────── */
+label {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--ui-muted);
+  margin-bottom: var(--space-1);
+}
+
+/* ── Layout helpers ─────────────────────────────────────── */
+.form-group {
+  margin-bottom: var(--space-3);
+}
+
+.form-row {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.form-row > * {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* ── Help text ──────────────────────────────────────────── */
+.form-help {
+  font-size: var(--text-xs);
+  color: var(--ui-muted);
+  margin-top: var(--space-1);
+}

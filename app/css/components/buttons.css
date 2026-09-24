@@ -1,0 +1,104 @@
+/* ============================================================
+   buttons.css — Componente botón (genérico)
+   ============================================================
+   Single responsibility: estilos genéricos de botón reutilizables.
+   Uso: <button class="btn btn--primary">Aceptar</button>
+
+   Variantes:
+     .btn            base (todos los botones heredan esto)
+     .btn--primary   acción principal (filled accent)
+     .btn--ghost     secundario (border, transparente)
+     .btn--danger    destructivo
+     .btn--small     tamaño chico
+     .btn--icon      solo ícono (cuadrado 34px)
+
+   Para botones específicos de un componente (ej: .topbar__btn),
+   crear la clase en el archivo del componente, no acá.
+*/
+
+/* ── Base ───────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--ui-text);
+  background: var(--ui-surface-2);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast), box-shadow var(--t-fast);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: var(--ui-surface);
+  border-color: var(--ui-accent);
+  color: var(--ui-accent);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Primary (filled accent) ────────────────────────────── */
+.btn--primary {
+  background: var(--ui-accent);
+  color: var(--ui-bg);
+  border-color: var(--ui-accent);
+}
+
+.btn--primary:hover {
+  background: var(--ui-accent);
+  color: var(--ui-bg);
+  border-color: var(--ui-accent);
+  filter: brightness(1.1);
+}
+
+/* ── Ghost (transparent border) ─────────────────────────── */
+.btn--ghost {
+  background: transparent;
+  border-color: var(--ui-border);
+  color: var(--ui-muted);
+}
+
+.btn--ghost:hover {
+  background: transparent;
+  border-color: var(--ui-accent);
+  color: var(--ui-accent);
+}
+
+/* ── Danger (destructive) ───────────────────────────────── */
+.btn--danger {
+  background: var(--ui-danger);
+  color: var(--ui-bg);
+  border-color: var(--ui-danger);
+}
+
+.btn--danger:hover {
+  filter: brightness(1.1);
+}
+
+/* ── Small (tamaño chico) ───────────────────────────────── */
+.btn--small {
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-xs);
+}
+
+/* ── Icon (cuadrado, solo ícono) ────────────────────────── */
+.btn--icon {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  padding: 0;
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5, user-scalable=yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0a0a12">
+  <meta name="description" content="LGMDM Intelligent Mastering Console — professional audio mastering workspace">
+
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self' https://masteringstudio.duckdns.org wss://masteringstudio.duckdns.org https://masteringstudio-api.duckdns.org wss://masteringstudio-api.duckdns.org; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'self'">
+
+  <title>LGMDM · Intelligent Mastering Console</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="css/_index.css">
+
+</head>
+<body>
+
+  <a href="#console" class="sr-only sr-only-focusable">Saltar al contenido principal</a>
+
+  <div id="auth-overlay" class="hidden"></div>
+
+  <div id="app-container">
+
+    <header class="topbar">
+      <div class="topbar__brand">
+        <span class="topbar__logo" aria-hidden="true">LG</span>
+        <span class="topbar__name">LGMDM</span>
+      </div>
+
+      <nav class="topbar__actions" aria-label="Acciones principales">
+        <button class="topbar__btn" type="button" title="Suite Pro">
+          <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5L2 6l6 7.5 6-7.5-2-3.5H4z"/><path d="M2 6h12"/><path d="M5.5 2.5L7 6l1 7.5 1-7.5 1.5-3.5"/></svg>
+          <span>SUITE PRO</span>
+        </button>
+
+        <button class="topbar__btn" type="button" title="Pro Insert Rack">
+          <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2.5" width="12" height="3.5" rx="1"/><rect x="2" y="6.5" width="12" height="3.5" rx="1"/><rect x="2" y="10.5" width="12" height="3.5" rx="1"/><circle cx="5" cy="4.2" r="0.8" fill="currentColor"/><circle cx="11" cy="8.2" r="0.8" fill="currentColor"/><circle cx="5" cy="12.2" r="0.8" fill="currentColor"/></svg>
+          <span>RACK</span>
+        </button>
+
+        <button class="topbar__btn" type="button" title="Historial (Ctrl+H)" aria-label="Mostrar historial">
+          <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 8a5.5 5.5 0 1 1 1.6 3.9"/><path d="M2 4v4h4"/><path d="M8 5v3.2l2.2 1.3"/></svg>
+        </button>
+
+        <button class="topbar__btn" type="button" title="Cambiar tema" aria-label="Cambiar tema">
+          <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M8 2a6 6 0 0 1 0 12V2z"/></svg>
+        </button>
+
+        <div class="topbar__user" hidden>
+          <span class="topbar__user-name">Usuario</span>
+          <button class="topbar__btn" type="button" title="Cerrar sesión" aria-label="Cerrar sesión">⎋</button>
+        </div>
+      </nav>
+    </header>
+
+    <div class="main-container">
+
+      <aside class="sidebar" aria-label="Panel de control lateral">
+
+        <div class="sidebar__tabs" role="tablist" aria-label="Flujo de trabajo">
+
+          <button class="sidebar__tab sidebar__tab--active" data-pane="pane-mastering-ref" id="tabMasteringRef" type="button" role="tab" aria-selected="true" aria-controls="pane-mastering-ref" aria-label="Mastering-Ref" tabindex="0">
+            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2.5"/><line x1="8" y1="1" x2="8" y2="3.5"/><line x1="8" y1="12.5" x2="8" y2="15"/><line x1="1" y1="8" x2="3.5" y2="8"/><line x1="12.5" y1="8" x2="15" y2="8"/></svg>
+            <span>Mastering-Ref</span>
+          </button>
+
+          <button class="sidebar__tab" data-pane="pane-cadena" id="tabCadena" type="button" role="tab" aria-selected="false" aria-controls="pane-cadena" aria-label="Cadena" tabindex="-1">
+            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 4.5a2.5 2.5 0 0 1 3.5 0l1.5 1.5a2.5 2.5 0 0 1 0 3.5l-1 1a.5.5 0 0 1-.7-.7l1-1a1.5 1.5 0 0 0 0-2.1L10.3 5.2a1.5 1.5 0 0 0-2.1 0L7.1 6.3a.5.5 0 1 1-.7-.7l1.1-1.1zm-1 3.2a.5.5 0 0 1 .7.7l-1 1a1.5 1.5 0 0 0 0 2.1l1.5 1.5a1.5 1.5 0 0 0 2.1 0l1.1-1.1a.5.5 0 1 1 .7.7l-1.1 1.1a2.5 2.5 0 0 1-3.5 0l-1.5-1.5a2.5 2.5 0 0 1 0-3.5l1-1z"/></svg>
+            <span>Cadena</span>
+          </button>
+
+          <button class="sidebar__tab" data-pane="pane-salida" id="tabSalida" type="button" role="tab" aria-selected="false" aria-controls="pane-salida" aria-label="Salida" tabindex="-1">
+            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="3.5" y1="2" x2="3.5" y2="14"/><line x1="8" y1="2" x2="8" y2="14"/><line x1="12.5" y1="2" x2="12.5" y2="14"/><rect x="1.5" y="8" width="4" height="3" rx="1" fill="currentColor"/><rect x="6" y="4" width="4" height="3" rx="1" fill="currentColor"/><rect x="10.5" y="6" width="4" height="3" rx="1" fill="currentColor"/></svg>
+            <span>Salida</span>
+          </button>
+
+          <button class="sidebar__tab" data-pane="pane-mixer" id="tabMixer" type="button" role="tab" aria-selected="false" aria-controls="pane-mixer" aria-label="Mixer" tabindex="-1">
+            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="4.5" cy="5" r="2.5"/><circle cx="11.5" cy="5" r="2.5"/><circle cx="4.5" cy="11.5" r="2.5"/><circle cx="11.5" cy="11.5" r="2.5"/><path d="M4.5 3.5v1.5h1.5"/><path d="M11.5 3.5v1.5h1.5"/><path d="M4.5 10v1.5h1.5"/><path d="M11.5 10v1.5h1.5"/></svg>
+            <span>Mixer</span>
+          </button>
+
+        </div>
+
+        <div class="sidebar__panes">
+          <div class="sidebar__pane sidebar__pane--active" id="pane-mastering-ref" role="tabpanel" aria-labelledby="tabMasteringRef">Próximamente</div>
+          <div class="sidebar__pane" id="pane-cadena" role="tabpanel" aria-labelledby="tabCadena" hidden>Próximamente</div>
+          <div class="sidebar__pane" id="pane-salida" role="tabpanel" aria-labelledby="tabSalida" hidden>Próximamente</div>
+          <div class="sidebar__pane" id="pane-mixer" role="tabpanel" aria-labelledby="tabMixer" hidden>Próximamente</div>
+        </div>
+
+      </aside>
+
+      <div class="resize-handle" role="separator" aria-label="Redimensionar panel" tabindex="0"></div>
+
+      <main class="console" id="console" tabindex="-1">
+        <p class="console__placeholder">Workspace console — próximamente</p>
+      </main>
+
+    </div>
+  </div>
+
+  <script type="module" src="js/entry.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+/* ============================================================
+   sidebar.css — Componente sidebar
+   ============================================================
+   Single responsibility: estilos del sidebar (container + tabs + panes).
+   Estructura: .sidebar > (.sidebar__tabs > .sidebar__tab + .sidebar__panes > .sidebar__pane)
+*/
+
+/* ── Container ──────────────────────────────────────────── */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  background: var(--ui-surface);
+  border-right: 1px solid var(--ui-border);
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-width: 0;
+  position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ui-border) transparent;
+}
+
+/* ── Tabs (Mastering-Ref, Cadena, Salida, Mixer) ───────── */
+.sidebar__tabs {
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  background: var(--ui-surface-2);
+  border-radius: var(--radius);
+  flex-shrink: 0;
+  margin-bottom: var(--space-2);
+}
+
+.sidebar__tab {
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--text-xs);
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--ui-muted);
+  background: transparent;
+  border: none;
+  border-radius: calc(var(--radius) - 2px);
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background var(--t-fast), color var(--t-fast);
+  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+}
+
+.sidebar__tab:hover {
+  color: var(--ui-text);
+  background: var(--ui-panel-strong);
+}
+
+.sidebar__tab--active {
+  color: var(--ui-text);
+  background: var(--ui-surface);
+  font-weight: 700;
+}
+
+.sidebar__tab svg {
+  flex-shrink: 0;
+}
+
+/* ── Panes (solo el activo visible) ─────────────────────── */
+.sidebar__panes {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar__pane {
+  display: none;
+}
+
+.sidebar__pane--active {
+  display: block;
+}

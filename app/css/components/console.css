@@ -1,0 +1,32 @@
+/* ============================================================
+   console.css — Componente workspace console
+   ============================================================
+   Single responsibility: estilos del área principal (workspace console).
+   Aquí vivirán las futuras canvases (audio waveform, EQ, meters, etc.).
+   Estructura: <main class="console">
+*/
+
+/* ── Container ──────────────────────────────────────────── */
+.console {
+  background: var(--ui-bg);
+  overflow: auto;
+  padding: var(--space-4);
+  min-width: 0;
+  min-height: 0;
+}
+
+/* ── Placeholder (temporal, mientras no hay features) ──── */
+.console__placeholder {
+  padding: var(--space-4);
+  color: var(--ui-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+/* ── Canvas host (para futuras canvases ResizeObserver) ─── */
+.canvas-host {
+  container-type: inline-size;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+}
