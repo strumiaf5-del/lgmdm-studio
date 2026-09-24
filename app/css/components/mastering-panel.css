@@ -4,13 +4,23 @@
    Single responsibility: estilos del panel de mastering.
    Estructura: .mastering-panel > (.mastering-panel__header + .mastering-panel__status +
                   .mastering-panel__sections + .mastering-panel__result)
+
+   Consistente con audio-canvas.css, meters-canvas.css, eq-canvas.css:
+   - Container con border warm + shadow-modal + radius-xl
+   - Headers con mono + 0.1em + heading-warm + space-4
+   - Sections con border-left warm-soft accent
 */
 
 .mastering-panel {
-  padding: var(--space-3);
+  padding: var(--space-4);
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
+  background: var(--ui-surface);
+  border: 1px solid color-mix(in srgb, var(--ui-warm) 16%, transparent);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-modal),
+              inset 0 0 0 1px color-mix(in srgb, var(--ui-text) 2%, transparent);
 }
 
 .mastering-panel__header {
@@ -22,11 +32,13 @@
 
 .mastering-panel__title {
   margin: 0;
-  font-size: var(--text-md);
+  font-size: var(--text-xs);
   font-weight: 700;
-  color: var(--ui-text);
+  font-family: var(--font-mono);
+  color: var(--ui-heading-warm);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-4);
 }
 
 .mastering-panel__actions {
@@ -38,6 +50,7 @@
   padding: var(--space-2) var(--space-3);
   background: var(--ui-surface-2);
   border: 1px solid var(--ui-border);
+  border-left: 2px solid var(--ui-warn);
   border-radius: var(--radius-md);
   font-size: var(--text-sm);
   color: var(--ui-muted);
@@ -53,21 +66,27 @@
 .mastering-section {
   background: var(--ui-surface);
   border: 1px solid var(--ui-border);
+  border-left: 2px solid color-mix(in srgb, var(--ui-warm-soft) 50%, transparent);
   border-radius: var(--radius-md);
 }
 
 .mastering-section[open] {
   border-color: var(--ui-accent);
+  border-left-color: color-mix(in srgb, var(--ui-warm-soft) 50%, transparent);
 }
 
 .mastering-section__title {
   padding: var(--space-3);
   cursor: pointer;
-  font-weight: 600;
-  font-size: var(--text-sm);
-  color: var(--ui-text);
+  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ui-heading-warm);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   user-select: none;
   list-style: none;
+  margin-bottom: var(--space-2);
 }
 
 .mastering-section__title::-webkit-details-marker {
