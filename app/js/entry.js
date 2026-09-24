@@ -12,6 +12,7 @@ import { initThemeSwitcher } from './features/theme/switcher.js';
 import { initAudioCanvas } from './features/canvas/audio.js';
 import { initMetersCanvas } from './features/canvas/meters.js';
 import { initEqCanvas } from './features/canvas/eq.js';
+import { initMasteringPanel } from './features/canvas/mastering.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   if (!initSession()) return;
@@ -21,5 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initAudioCanvas();
   initMetersCanvas();
   initEqCanvas();
-  console.log('[LGMDM] Phase 2 ready: auth + sidebar + theme + audio + meters + eq.');
+  initMasteringPanel();
+  console.log('[LGMDM] Phase 2 ready: auth + sidebar + theme + audio + meters + eq + mastering.');
 });

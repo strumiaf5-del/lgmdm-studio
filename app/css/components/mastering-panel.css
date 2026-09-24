@@ -1,0 +1,161 @@
+/* ============================================================
+   mastering-panel.css — Componente Mastering panel
+   ============================================================
+   Single responsibility: estilos del panel de mastering.
+   Estructura: .mastering-panel > (.mastering-panel__header + .mastering-panel__status +
+                  .mastering-panel__sections + .mastering-panel__result)
+*/
+
+.mastering-panel {
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.mastering-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.mastering-panel__title {
+  margin: 0;
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--ui-text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.mastering-panel__actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.mastering-panel__status {
+  padding: var(--space-2) var(--space-3);
+  background: var(--ui-surface-2);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--ui-muted);
+  font-family: var(--font-mono);
+}
+
+.mastering-panel__sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.mastering-section {
+  background: var(--ui-surface);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--radius-md);
+}
+
+.mastering-section[open] {
+  border-color: var(--ui-accent);
+}
+
+.mastering-section__title {
+  padding: var(--space-3);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: var(--text-sm);
+  color: var(--ui-text);
+  user-select: none;
+  list-style: none;
+}
+
+.mastering-section__title::-webkit-details-marker {
+  display: none;
+}
+
+.mastering-section__title::before {
+  content: '▸';
+  display: inline-block;
+  margin-right: var(--space-2);
+  transition: transform var(--t-fast);
+  color: var(--ui-muted);
+}
+
+.mastering-section[open] .mastering-section__title::before {
+  transform: rotate(90deg);
+  color: var(--ui-accent);
+}
+
+.mastering-section__params {
+  padding: 0 var(--space-3) var(--space-3);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-3);
+}
+
+.mastering-param {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-2);
+  align-items: center;
+  font-size: var(--text-sm);
+}
+
+.mastering-param--checkbox {
+  grid-template-columns: auto 1fr;
+  gap: var(--space-2);
+}
+
+.mastering-param__label {
+  color: var(--ui-muted);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  grid-column: 1 / -1;
+}
+
+.mastering-param input[type="range"] {
+  width: 100%;
+  grid-column: 1 / 2;
+}
+
+.mastering-param select {
+  padding: var(--space-1) var(--space-2);
+  background: var(--ui-surface-2);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--radius-sm);
+  color: var(--ui-text);
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+}
+
+.mastering-param__value {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ui-accent);
+  min-width: 60px;
+  text-align: right;
+}
+
+.mastering-panel__result {
+  padding: var(--space-3);
+  background: var(--ui-surface);
+  border: 1px solid var(--ui-accent);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.mastering-panel__result h4 {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--ui-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.mastering-panel__audio {
+  width: 100%;
+}
