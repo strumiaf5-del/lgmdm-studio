@@ -21,7 +21,7 @@ body {
 
 .auth-container {
   width: 100%;
-  max-width: 420px;
+  max-width: var(--auth-container-max-w);
   margin: auto;
 }
 
@@ -57,12 +57,13 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: var(--brand-mark-size);
+  height: var(--brand-mark-size);
   border-radius: var(--radius-md);
   background: linear-gradient(135deg, var(--ui-accent), var(--ui-accent-2));
   color: var(--ui-bg);
   font-size: var(--text-base);
+  text-shadow: 0 0 25px color-mix(in srgb, var(--ui-warm-bright) 35%, transparent);
 }
 
 .brand-subtitle {
@@ -79,8 +80,8 @@ body {
 /* ── Tabs (Login / Register) ────────────────────────────── */
 .auth-tabs {
   display: flex;
-  gap: 4px;
-  padding: 4px;
+  gap: var(--space-1);
+  padding: var(--space-1);
   background: var(--ui-surface-2);
   border: 1px solid var(--ui-border);
   border-radius: var(--radius-md);
@@ -99,7 +100,11 @@ body {
   border-radius: calc(var(--radius-md) - 2px);
   cursor: pointer;
   text-align: center;
-  transition: color var(--t-fast), background var(--t-fast), border-color var(--t-fast);
+  transition:
+    color var(--t-fast),
+    background var(--t-fast),
+    border-color var(--t-fast),
+    box-shadow var(--t-fast);
 }
 
 .auth-tab:hover {
@@ -112,6 +117,7 @@ body {
   background: var(--ui-panel-strong);
   border: 1px solid var(--ui-accent);
   font-weight: 700;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--ui-accent) 30%, transparent);
 }
 
 /* ── Form panel ─────────────────────────────────────────── */

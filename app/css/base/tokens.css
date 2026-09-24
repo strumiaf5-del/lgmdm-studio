@@ -27,6 +27,8 @@
   --lg-topbar-logo-size:        32px;
   --lg-topbar-user-name-max-w:  130px;
   --lg-form-textarea-min-h:     5rem;
+  --lg-auth-container-max-w:    420px;
+  --lg-brand-mark-size:         36px;
 
   --header-h:                   var(--lg-header-h);
   --sidebar-w:                  var(--lg-sidebar-w);
@@ -37,6 +39,8 @@
   --topbar-logo-size:           var(--lg-topbar-logo-size);
   --topbar-user-name-max-w:     var(--lg-topbar-user-name-max-w);
   --form-textarea-min-h:        var(--lg-form-textarea-min-h);
+  --auth-container-max-w:       var(--lg-auth-container-max-w);
+  --brand-mark-size:            var(--lg-brand-mark-size);
 
   /* ── Spacing scale (sin huecos: 4, 8, 12, 16, 20, 24, 32, 48, 64) ── */
   --space-1: 0.25rem;  /*  4px */
