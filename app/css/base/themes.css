@@ -37,6 +37,7 @@
   /* Semantic (good/warn/danger/info) */
   --ui-good: #45f6b2;
   --ui-warn: #ffbd4a;
+  --ui-warn-2: #d97706;
   --ui-danger: #ff4264;
   --ui-info: #4dc4ff;
 
@@ -46,7 +47,11 @@
   /* Warm brand identity (consistente entre temas) */
   --ui-warm:        #e8a020;
   --ui-warm-soft:   #e7b15a;
+  --ui-warm-bright: #f0b840;
   --ui-text-warm:   #fff9e6;
+
+  /* Text on accent/warm backgrounds (oscuro para legibilidad) */
+  --ui-text-on-accent: #071018;
 
   /* Ghost (translúcidos para hover/active) */
   --ui-accent-ghost: rgba(35,231,255,.08);
@@ -70,12 +75,15 @@
   --ui-accent-2: #5558bb;
   --ui-good: #18885e;
   --ui-warn: #b56b00;
+  --ui-warn-2: #8a5100;
   --ui-danger: #c83d4b;
   --ui-info: #1974a8;
   --ui-heading-warm: #7a6a42;
   --ui-warm:        #b8860b;
   --ui-warm-soft:   #b8860b;
+  --ui-warm-bright: #d4a017;
   --ui-text-warm:   #3a2f1a;
+  --ui-text-on-accent: #ffffff;
   --ui-accent-ghost: rgba(8,124,167,.09);
   --ui-surface-ghost: rgba(0,0,0,.04);
 }

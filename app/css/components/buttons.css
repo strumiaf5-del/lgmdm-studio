@@ -6,7 +6,7 @@
 
    Variantes:
      .btn            base (todos los botones heredan esto)
-     .btn--primary   acción principal (filled accent)
+     .btn--primary   acción principal (warm gradient + shine animation)
      .btn--ghost     secundario (border, transparente)
      .btn--danger    destructivo
      .btn--small     tamaño chico
@@ -14,6 +14,8 @@
 
    Para botones específicos de un componente (ej: .topbar__btn),
    crear la clase en el archivo del componente, no acá.
+
+   Inspirado en dist/components/buttons.css (bugs NO adoptados).
 */
 
 /* ── Base ───────────────────────────────────────────────── */
@@ -31,38 +33,75 @@
   border: 1px solid var(--ui-border);
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast), box-shadow var(--t-fast);
+  transition:
+    background var(--t-fast),
+    border-color var(--t-fast),
+    color var(--t-fast),
+    box-shadow var(--t-fast),
+    transform var(--t-fast);
   white-space: nowrap;
   text-decoration: none;
+  box-shadow: var(--shadow-sm);
 }
 
 .btn:hover {
   background: var(--ui-surface);
-  border-color: var(--ui-accent);
-  color: var(--ui-accent);
+  border-color: var(--ui-warn);
+  color: var(--ui-warn);
+  box-shadow: var(--shadow-sm),
+              0 0 0 1px color-mix(in srgb, var(--ui-warm-bright, var(--ui-warm)) 15%, transparent);
+  transform: translateY(-1px);
 }
 
 .btn:active {
-  transform: translateY(1px);
+  transform: translateY(0) scale(0.98);
 }
 
 .btn:disabled {
-  opacity: 0.4;
+  opacity: 0.35;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: var(--shadow-sm);
 }
 
-/* ── Primary (filled accent) ────────────────────────────── */
+/* ── Primary (warm gradient + shine animation) ────────── */
 .btn--primary {
-  background: var(--ui-accent);
-  color: var(--ui-bg);
-  border-color: var(--ui-accent);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--ui-warn) 0%, var(--ui-warn-2) 100%);
+  color: var(--ui-text-on-accent);
+  border-color: transparent;
+  box-shadow: 0 2px 12px color-mix(in srgb, var(--ui-warm) 30%, transparent);
 }
 
 .btn--primary:hover {
-  background: var(--ui-accent);
-  color: var(--ui-bg);
-  border-color: var(--ui-accent);
-  filter: brightness(1.1);
+  background: linear-gradient(135deg, var(--ui-warn) 0%, var(--ui-warn-2) 100%);
+  color: var(--ui-text-on-accent);
+  border-color: transparent;
+  filter: brightness(1.08);
+  box-shadow: 0 4px 18px color-mix(in srgb, var(--ui-warm) 50%, transparent);
+  transform: translateY(-1px);
+}
+
+.btn--primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn--primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    transparent,
+    color-mix(in srgb, var(--ui-text-on-accent) 20%, transparent),
+    transparent);
+  transform: translateX(-120%);
+  transition: transform 0.45s ease;
+  pointer-events: none;
+}
+
+.btn--primary:not(:disabled):hover::after {
+  transform: translateX(120%);
 }
 
 /* ── Ghost (transparent border) ─────────────────────────── */
@@ -74,19 +113,23 @@
 
 .btn--ghost:hover {
   background: transparent;
-  border-color: var(--ui-accent);
-  color: var(--ui-accent);
+  border-color: var(--ui-warn);
+  color: var(--ui-warn);
+  transform: translateY(-1px);
 }
 
 /* ── Danger (destructive) ───────────────────────────────── */
 .btn--danger {
   background: var(--ui-danger);
-  color: var(--ui-bg);
+  color: var(--ui-text-on-accent);
   border-color: var(--ui-danger);
+  box-shadow: 0 2px 12px color-mix(in srgb, var(--ui-danger) 30%, transparent);
 }
 
 .btn--danger:hover {
   filter: brightness(1.1);
+  box-shadow: 0 4px 18px color-mix(in srgb, var(--ui-danger) 50%, transparent);
+  transform: translateY(-1px);
 }
 
 /* ── Small (tamaño chico) ───────────────────────────────── */
@@ -97,8 +140,8 @@
 
 /* ── Icon (cuadrado, solo ícono) ────────────────────────── */
 .btn--icon {
-  width: 34px;
-  height: 34px;
-  min-width: 34px;
+  width: var(--btn-icon-size);
+  height: var(--btn-icon-size);
+  min-width: var(--btn-icon-size);
   padding: 0;
 }
