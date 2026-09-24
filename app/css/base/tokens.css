@@ -31,6 +31,10 @@
   --lg-brand-mark-size:         36px;
   --lg-toast-min-w:             240px;
   --lg-toast-max-w:             420px;
+  --lg-resize-handle-hit-w:     12px;
+  --lg-resize-handle-hit-offset: -4px;
+  --lg-shell-sidebar-max-h-tablet: 420px;
+  --lg-shell-mobile-padding:    6px;
 
   --header-h:                   var(--lg-header-h);
   --sidebar-w:                  var(--lg-sidebar-w);
@@ -45,8 +49,12 @@
   --brand-mark-size:            var(--lg-brand-mark-size);
   --toast-min-w:                var(--lg-toast-min-w);
   --toast-max-w:                var(--lg-toast-max-w);
+  --resize-handle-hit-w:         var(--lg-resize-handle-hit-w);
+  --resize-handle-hit-offset:   var(--lg-resize-handle-hit-offset);
+  --shell-sidebar-max-h-tablet: var(--lg-shell-sidebar-max-h-tablet);
+  --shell-mobile-padding:       var(--lg-shell-mobile-padding);
 
-  /* ── Spacing scale (sin huecos: 4, 8, 12, 16, 20, 24, 32, 48, 64) ── */
+  /* ── Spacing scale (sin huecos: 4, 6, 8, 12, 16, 20, 24, 32, 48, 64) ── */
   --space-1: 0.25rem;  /*  4px */
   --space-2: 0.5rem;   /*  8px */
   --space-3: 0.75rem;  /* 12px */
