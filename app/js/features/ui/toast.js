@@ -5,6 +5,8 @@
    API: toast.success(msg), toast.error(msg), toast.info(msg)
 */
 
+import { byId } from '../../core/dom.js';
+
 const DURATIONS = {
   success: 3000,
   error: 5000,
@@ -26,10 +28,6 @@ function show(msg, type) {
   container.appendChild(el);
   setTimeout(() => el.classList.add('toast--leave'), DURATIONS[type] - 300);
   setTimeout(() => el.remove(), DURATIONS[type]);
-}
-
-function byId(id) {
-  return document.getElementById(id);
 }
 
 function createContainer() {

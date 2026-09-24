@@ -1,15 +1,13 @@
 /* ============================================================
    state.js — Store global con subscribe pattern
    ============================================================
-   Single responsibility: guardar valores y notificar a listeners. NADA MÁS.
-   Sin DOM, sin fetch, sin storage, sin nada más.
+   Single responsibility: guardar valores y notificar a listeners.
+   NADA MÁS. Sin DOM, sin fetch, sin storage, sin nada más.
 
-   Uso:
-     import { get, set, subscribe } from './core/state.js';
-
-     set('auth', { user: 'juan' });
-     subscribe('auth', (val) => console.log('auth cambió:', val));
-     const current = get('auth');
+   API:
+     get(key)                 → valor actual
+     set(key, value)          → guarda + notifica listeners
+     subscribe(key, fn)       → registra listener, retorna unsubscribe()
 */
 
 const _state = {};
