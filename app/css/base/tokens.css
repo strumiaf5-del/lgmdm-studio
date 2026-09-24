@@ -24,13 +24,17 @@
   --lg-content-pad-y:  clamp(8px, 1.2vh, 18px);
   --lg-range-h:        4px;
   --lg-btn-icon-size:  34px;
+  --lg-topbar-logo-size:        32px;
+  --lg-topbar-user-name-max-w:  130px;
 
-  --header-h:        var(--lg-header-h);
-  --sidebar-w:       var(--lg-sidebar-w);
-  --sidebar-w-min:   var(--lg-sidebar-min-w);
-  --sidebar-w-max:   var(--lg-sidebar-max-w);
-  --handle-w:        var(--lg-handle-w);
-  --btn-icon-size:   var(--lg-btn-icon-size);
+  --header-h:                   var(--lg-header-h);
+  --sidebar-w:                  var(--lg-sidebar-w);
+  --sidebar-w-min:              var(--lg-sidebar-min-w);
+  --sidebar-w-max:              var(--lg-sidebar-max-w);
+  --handle-w:                   var(--lg-handle-w);
+  --btn-icon-size:              var(--lg-btn-icon-size);
+  --topbar-logo-size:           var(--lg-topbar-logo-size);
+  --topbar-user-name-max-w:     var(--lg-topbar-user-name-max-w);
 
   /* ── Spacing scale (sin huecos: 4, 8, 12, 16, 20, 24, 32, 48, 64) ── */
   --space-1: 0.25rem;  /*  4px */
