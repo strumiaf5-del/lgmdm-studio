@@ -10,6 +10,7 @@ import { initSidebarTabs } from './features/sidebar/tabs.js';
 import { initSidebarResize } from './features/sidebar/resize.js';
 import { initThemeSwitcher } from './features/theme/switcher.js';
 import { initAudioCanvas } from './features/canvas/audio.js';
+import { initMetersCanvas } from './features/canvas/meters.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   if (!initSession()) return;
@@ -17,5 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initSidebarResize();
   initThemeSwitcher();
   initAudioCanvas();
-  console.log('[LGMDM] Phase 2 ready: auth + sidebar + theme + audio canvas.');
+  initMetersCanvas();
+  console.log('[LGMDM] Phase 2 ready: auth + sidebar + theme + audio + meters.');
 });

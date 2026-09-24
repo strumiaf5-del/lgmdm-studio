@@ -8,6 +8,7 @@
 
 import { $ } from '../../core/dom.js';
 import { apiFetch } from '../../core/api.js';
+import { set as setState } from '../../core/state.js';
 
 const POLL_INTERVAL_MS = 500;
 const POLL_TIMEOUT_MS = 30000;
@@ -84,6 +85,12 @@ async function handleUpload(file) {
     if (durationEl) durationEl.textContent = `${source.duration_sec.toFixed(2)} s`;
     if (meta) meta.classList.remove('hidden');
     if (status) status.textContent = `Procesando ${file.name}…`;
+
+    setState('source', {
+      source_id: source.source_id,
+      duration_sec: source.duration_sec,
+      filename: file.name,
+    });
 
     await pollProgress(source.source_id, progressBar);
 
