@@ -4,6 +4,13 @@
    Single responsibility: estilos del widget de meters
    (peak/RMS/TruePeak bars, LUFS número, stereo correlation).
    Estructura: .meters-canvas > .meters-canvas__title + .meters-canvas__grid > .meters-canvas__item
+
+   Patrones adoptados del original (dist/components/meters.css):
+   - border-left 2px warm-soft (accent panel)
+   - border-left 2px warn (sección warning/LUFS)
+   - border-radius 7px (más refinado que 8px)
+   - Headers con mono + 0.1em letter-spacing + heading-warm + space-4
+   - Value states (good/warn/bad/neutral)
 */
 
 .meters-canvas {
@@ -15,11 +22,13 @@
 
 .meters-canvas__title {
   margin: 0;
-  font-size: var(--text-md);
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
   font-weight: 700;
-  color: var(--ui-text);
+  color: var(--ui-heading-warm);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-4);
 }
 
 .meters-canvas__grid {
@@ -35,11 +44,13 @@
   padding: var(--space-3);
   background: var(--ui-surface);
   border: 1px solid var(--ui-border);
-  border-radius: var(--radius-md);
+  border-left: 2px solid color-mix(in srgb, var(--ui-warm-soft) 50%, transparent);
+  border-radius: 7px;
 }
 
 .meters-canvas__item--big {
   grid-column: 1 / -1;
+  border-left: 2px solid var(--ui-warn);
 }
 
 .meters-canvas__item--wide {
@@ -72,6 +83,11 @@
   font-size: var(--text-sm);
   color: var(--ui-text);
 }
+
+.meters-canvas__value--good    { color: var(--ui-good); }
+.meters-canvas__value--warn    { color: var(--ui-warn); }
+.meters-canvas__value--bad     { color: var(--ui-danger); }
+.meters-canvas__value--neutral { color: var(--ui-text); }
 
 .meters-canvas__big {
   font-family: var(--font-mono);

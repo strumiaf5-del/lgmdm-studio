@@ -40,6 +40,9 @@
   --ui-danger: #ff4264;
   --ui-info: #4dc4ff;
 
+  /* Heading accents (warm/amber suave para títulos secundarios) */
+  --ui-heading-warm: #d4c18d;
+
   /* Ghost (translúcidos para hover/active) */
   --ui-accent-ghost: rgba(35,231,255,.08);
   --ui-surface-ghost: rgba(128,128,128,.06);
@@ -64,6 +67,7 @@
   --ui-warn: #b56b00;
   --ui-danger: #c83d4b;
   --ui-info: #1974a8;
+  --ui-heading-warm: #7a6a42;
   --ui-accent-ghost: rgba(8,124,167,.09);
   --ui-surface-ghost: rgba(0,0,0,.04);
 }
