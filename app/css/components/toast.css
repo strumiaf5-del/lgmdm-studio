@@ -1,0 +1,63 @@
+/* ============================================================
+   toast.css — Componente toast notifications
+   ============================================================
+   Single responsibility: estilos del sistema de toasts.
+   .toast-container es el contenedor global (auto-creado).
+   .toast es cada notificación individual.
+*/
+
+.toast-container {
+  position: fixed;
+  top: var(--space-4);
+  right: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  z-index: var(--z-toast);
+  pointer-events: none;
+}
+
+.toast {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  min-width: 240px;
+  max-width: 420px;
+  box-shadow: var(--shadow-lg);
+  animation: toast-in var(--t-med) ease-out;
+  pointer-events: auto;
+  backdrop-filter: blur(12px);
+}
+
+.toast--leave {
+  animation: toast-out 300ms ease-in forwards;
+}
+
+.toast--success {
+  background: color-mix(in srgb, var(--ui-good) 18%, var(--ui-surface));
+  border: 1px solid var(--ui-good);
+  color: var(--ui-good);
+}
+
+.toast--error {
+  background: color-mix(in srgb, var(--ui-danger) 18%, var(--ui-surface));
+  border: 1px solid var(--ui-danger);
+  color: var(--ui-danger);
+}
+
+.toast--info {
+  background: color-mix(in srgb, var(--ui-accent) 18%, var(--ui-surface));
+  border: 1px solid var(--ui-accent);
+  color: var(--ui-accent);
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes toast-out {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(20px); }
+}

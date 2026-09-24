@@ -9,6 +9,7 @@
 import { $ } from '../../core/dom.js';
 import { apiFetch } from '../../core/api.js';
 import { set as setState } from '../../core/state.js';
+import { toast } from '../ui/toast.js';
 
 const POLL_INTERVAL_MS = 500;
 const POLL_TIMEOUT_MS = 30000;
@@ -100,9 +101,11 @@ async function handleUpload(file) {
     }
     if (status) status.textContent = `${file.name} · listo`;
     if (progress) progress.classList.add('hidden');
+    toast.success(`Audio cargado: ${file.name}`);
   } catch (err) {
     if (status) status.textContent = `Error: ${err.message}`;
     if (progress) progress.classList.add('hidden');
+    toast.error(`Error al cargar audio: ${err.message}`);
   }
 }
 
@@ -131,8 +134,6 @@ function drawSpectrum(canvas, spectrum) {
 
   const accent = getComputedStyle(document.documentElement)
     .getPropertyValue('--ui-accent').trim() || '#42e8ff';
-  const muted = getComputedStyle(document.documentElement)
-    .getPropertyValue('--ui-muted').trim() || '#6c7691';
 
   ctx.fillStyle = accent;
   ctx.strokeStyle = accent;
