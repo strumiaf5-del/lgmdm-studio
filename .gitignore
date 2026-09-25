@@ -16,6 +16,13 @@ Thumbs.db
 # Provenance local (merge history, no se sube al repo)
 reusado/
 
+# Workspace de merge: copias de ENTRADA (fuentes de solo lectura) y
+# la pre-copia de salida. Se regeneran, no se commitean.
+# Sí se commitean: merge/COLA.md y merge/informes/ (el razonamiento).
+merge/dist/
+merge/aporte/
+merge/salida/
+
 # Node (futuro)
 node_modules/
 npm-debug.log*
