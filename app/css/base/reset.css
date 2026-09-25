@@ -106,6 +106,35 @@ html {
   display: none;
 }
 
+/* Visually hidden pero accesible a lectores de pantalla.
+   index.html usa class="sr-only sr-only-focusable" en el skip-link;
+   sin esta regla, el skip-link queda siempre visible. .sr-only lo
+   oculta y .sr-only-focusable lo revela al recibir foco (teclado). */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only-focusable:focus,
+.sr-only-focusable:focus-visible {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  white-space: inherit;
+}
+
 @supports (padding: max(0px)) {
   .lg-app-root {
     padding-left: max(0px, env(safe-area-inset-left));
