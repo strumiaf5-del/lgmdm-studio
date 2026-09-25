@@ -28,7 +28,7 @@ function toggle() {
 
   if (isLight) {
     html.removeAttribute('data-theme');
-    ls.set(STORAGE_KEY, '');
+    ls.set(STORAGE_KEY, 'dark');
   } else {
     html.setAttribute('data-theme', LIGHT);
     ls.set(STORAGE_KEY, LIGHT);
