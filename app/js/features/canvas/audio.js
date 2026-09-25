@@ -13,6 +13,9 @@ import { toast } from '../ui/toast.js';
 
 const POLL_INTERVAL_MS = 500;
 const POLL_TIMEOUT_MS = 30000;
+const MAX_FILE_SIZE_MB = 50;
+
+let pollingCancelled = false;
 
 export function initAudioCanvas() {
   const consoleEl = $('.console');
@@ -59,6 +62,16 @@ function attachUpload() {
   });
 }
 
+function validateFile(file) {
+  if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+    return `Archivo demasiado grande (max ${MAX_FILE_SIZE_MB}MB)`;
+  }
+  if (file.type && !file.type.startsWith('audio/')) {
+    return `Tipo no soportado: ${file.type}. Use un archivo de audio.`;
+  }
+  return null;
+}
+
 async function handleUpload(file) {
   const status = $('.audio-canvas__status');
   const meta = $('.audio-canvas__meta');
@@ -67,6 +80,14 @@ async function handleUpload(file) {
   const progress = $('.audio-canvas__progress');
   const progressBar = $('.audio-canvas__progress-bar');
   const canvas = $('.audio-canvas__spectrum');
+
+  const error = validateFile(file);
+  if (error) {
+    toast.error(error);
+    return;
+  }
+
+  pollingCancelled = false;
 
   if (status) status.textContent = `Subiendo ${file.name}…`;
   if (meta) meta.classList.add('hidden');
@@ -95,6 +116,8 @@ async function handleUpload(file) {
 
     await pollProgress(source.source_id, progressBar);
 
+    if (pollingCancelled) return;
+
     const meters = await apiFetch(`/preview/meters/${source.source_id}`);
     if (canvas && meters.spectrum) {
       drawSpectrum(canvas, meters.spectrum);
@@ -109,9 +132,14 @@ async function handleUpload(file) {
   }
 }
 
+export function cancelAudioPolling() {
+  pollingCancelled = true;
+}
+
 async function pollProgress(sourceId, progressBar) {
   const start = Date.now();
   while (Date.now() - start < POLL_TIMEOUT_MS) {
+    if (pollingCancelled) throw new Error('Polling cancelado');
     const res = await apiFetch(`/preview/progress/${sourceId}`);
     const pct = Math.round((res.progress || 0) * 100);
     if (progressBar) progressBar.style.width = `${pct}%`;
