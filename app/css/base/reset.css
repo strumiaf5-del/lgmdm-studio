@@ -99,6 +99,13 @@ html {
   scroll-margin-top: var(--lg-header-h, 64px);
 }
 
+/* Utilidad de visibilidad. login.js conmuta la CLASE `hidden`
+   (classList.toggle('hidden')); el atributo `[hidden]` del UA
+   stylesheet no aplica a la clase, por lo que hace falta esta regla. */
+.hidden {
+  display: none;
+}
+
 @supports (padding: max(0px)) {
   .lg-app-root {
     padding-left: max(0px, env(safe-area-inset-left));
