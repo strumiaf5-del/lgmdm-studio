@@ -6,13 +6,24 @@
    mostrar resultado (player + download).
 */
 
-import { $, $$ } from '../../core/dom.js';
-import { get, subscribe } from '../../core/state.js';
-import { apiFetch } from '../../core/api.js';
+import { $ } from '../../core/dom.js';
+import { subscribe } from '../../core/state.js';
+import { apiFetchBlob } from '../../core/api.js';
 import { toast } from '../ui/toast.js';
 import { PARAMS_SCHEMA, DEFAULTS } from './params-schema.js';
 
+const PREVIEW_DURATION_SEC = 25;
+const STATUS_HIDE_DELAY_MS = 2000;
+
 let currentSource = null;
+
+/* Valores actuales de los parámetros.
+   Se inicializa desde DEFAULTS pero NUNCA lo muta — DEFAULTS queda
+   como referencia pura de defaults para reset. */
+let values = { ...DEFAULTS };
+
+let previewUrl = null;   // blob URL activo (se revoca al regenerar)
+let statusTimer = null;  // timer de ocultado de status (se limpia entre renders)
 
 export function initMasteringPanel() {
   const consoleEl = $('.console');
@@ -75,7 +86,7 @@ function renderParam(p) {
   if (p.type === 'checkbox') {
     return `
       <label class="mastering-param mastering-param--checkbox">
-        <input type="checkbox" data-key="${p.key}" ${p.default ? 'checked' : ''}>
+        <input type="checkbox" data-key="${p.key}" ${values[p.key] ? 'checked' : ''}>
         <span>${p.label}</span>
       </label>
     `;
@@ -85,7 +96,7 @@ function renderParam(p) {
       <label class="mastering-param">
         <span class="mastering-param__label">${p.label}</span>
         <select data-key="${p.key}">
-          ${p.options.map(o => `<option value="${o.value}" ${o.value === p.default ? 'selected' : ''}>${o.label}</option>`).join('')}
+          ${p.options.map(o => `<option value="${o.value}" ${o.value === values[p.key] ? 'selected' : ''}>${o.label}</option>`).join('')}
         </select>
       </label>
     `;
@@ -93,8 +104,8 @@ function renderParam(p) {
   return `
     <label class="mastering-param">
       <span class="mastering-param__label">${p.label}</span>
-      <input type="range" data-key="${p.key}" min="${p.min}" max="${p.max}" step="${p.step}" value="${p.default}">
-      <span class="mastering-param__value" data-value-for="${p.key}">${formatValue(p.default, p.unit)}</span>
+      <input type="range" data-key="${p.key}" min="${p.min}" max="${p.max}" step="${p.step}" value="${values[p.key]}">
+      <span class="mastering-param__value" data-value-for="${p.key}">${formatValue(values[p.key], p.unit)}</span>
     </label>
   `;
 }
@@ -113,15 +124,15 @@ function attachParamListeners(panel) {
     if (!key) return;
 
     if (target.type === 'checkbox') {
-      DEFAULTS[key] = target.checked;
+      values[key] = target.checked;
     } else if (target.type === 'range') {
       const val = parseFloat(target.value);
-      DEFAULTS[key] = val;
+      values[key] = val;
       const display = panel.querySelector(`[data-value-for="${key}"]`);
       const p = findParam(key);
       if (display && p) display.textContent = formatValue(val, p.unit);
     } else if (target.tagName === 'SELECT') {
-      DEFAULTS[key] = target.value;
+      values[key] = target.value;
     }
   });
 
@@ -141,11 +152,10 @@ function findParam(key) {
 
 function resetParams(panel) {
   PARAMS_SCHEMA.forEach(s => s.params.forEach(p => {
-    DEFAULTS[p.key] = p.default;
+    values[p.key] = p.default;
     const input = panel.querySelector(`[data-key="${p.key}"]`);
     if (input) {
       if (input.type === 'checkbox') input.checked = p.default;
-      else if (input.type === 'select') input.value = p.default;
       else input.value = p.default;
     }
     const display = panel.querySelector(`[data-value-for="${p.key}"]`);
@@ -175,31 +185,34 @@ async function doRender(panel) {
   const statusText = panel.querySelector('.mastering-panel__status-text');
   const result = panel.querySelector('.mastering-panel__result');
 
+  // Cancela el ocultado pendiente de un render anterior.
+  if (statusTimer) {
+    clearTimeout(statusTimer);
+    statusTimer = null;
+  }
+
   btn.disabled = true;
   status.classList.remove('hidden');
   statusText.textContent = 'Renderizando preview…';
 
   try {
-    const params = { ...DEFAULTS };
-    const res = await fetch('/api/preview', {
+    const blob = await apiFetchBlob('/preview', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${sessionStorage.getItem('master_auth_token')}` },
       body: JSON.stringify({
         preview_source_id: currentSource.source_id,
-        preview_duration_sec: 25,
-        params,
+        preview_duration_sec: PREVIEW_DURATION_SEC,
+        params: { ...values },
       }),
     });
 
-    if (!res.ok) throw new Error(`${res.status}: ${await res.text()}`);
-
-    const blob = await res.blob();
-    const url = URL.createObjectURL(blob);
+    // Libera el blob anterior antes de crear el nuevo (evita fuga de memoria).
+    if (previewUrl) URL.revokeObjectURL(previewUrl);
+    previewUrl = URL.createObjectURL(blob);
 
     const audio = panel.querySelector('.mastering-panel__audio');
     const download = panel.querySelector('.mastering-panel__download');
-    audio.src = url;
-    download.href = url;
+    audio.src = previewUrl;
+    download.href = previewUrl;
     result.classList.remove('hidden');
 
     statusText.textContent = 'Listo ✓';
@@ -209,6 +222,6 @@ async function doRender(panel) {
     toast.error(`Render falló: ${err.message}`);
   } finally {
     btn.disabled = false;
-    setTimeout(() => status.classList.add('hidden'), 2000);
+    statusTimer = setTimeout(() => status.classList.add('hidden'), STATUS_HIDE_DELAY_MS);
   }
 }
