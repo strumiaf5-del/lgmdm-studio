@@ -25,7 +25,9 @@ function buildHeaders(extra = {}) {
   return headers;
 }
 
-export async function apiFetch(path, options = {}) {
+/* Núcleo compartido: devuelve la Response ya validada.
+   apiFetch (JSON) y apiFetchBlob (binario) lo usan — sin duplicación. */
+async function request(path, options = {}) {
   const url = fullUrl(path);
   const opts = { ...options, headers: buildHeaders(options.headers || {}) };
 
@@ -47,16 +49,27 @@ export async function apiFetch(path, options = {}) {
     throw new Error(`network: ${err.message}`);
   }
 
-  const text = await res.text().catch(() => '');
-  const data = text ? safeJson(text) : null;
-
   if (!res.ok) {
+    const text = await res.text().catch(() => '');
+    const data = text ? safeJson(text) : null;
     const detail = data?.detail || text || res.statusText;
     console.warn(`[api] HTTP ${res.status}: ${path}`, detail);
     throw new Error(`${res.status}: ${detail}`);
   }
 
-  return data;
+  return res;
+}
+
+export async function apiFetch(path, options = {}) {
+  const res = await request(path, options);
+  const text = await res.text().catch(() => '');
+  return text ? safeJson(text) : null;
+}
+
+/* Para respuestas binarias (WAV, audio, archivos). Mismo timeout + auth + logging. */
+export async function apiFetchBlob(path, options = {}) {
+  const res = await request(path, options);
+  return res.blob();
 }
 
 function safeJson(text) {
