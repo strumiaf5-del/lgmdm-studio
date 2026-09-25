@@ -9,6 +9,7 @@
 import { $ } from '../../core/dom.js';
 import { subscribe } from '../../core/state.js';
 import { apiFetch } from '../../core/api.js';
+import { toast } from '../ui/toast.js';
 
 const F_MIN = 20;
 const F_MAX = 20000;
@@ -47,7 +48,7 @@ async function fetchAndRender(canvas, sourceId) {
     const meters = await apiFetch(`/preview/meters/${sourceId}`);
     if (meters.spectrum) drawSpectrum(canvas, meters.spectrum, meters.sample_rate);
   } catch (err) {
-    console.warn('[eq] fetch failed:', err.message);
+    toast.error(`EQ no disponible: ${err.message}`);
   }
 }
 
