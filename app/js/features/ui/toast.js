@@ -13,6 +13,9 @@ const DURATIONS = {
   info: 3000,
 };
 
+// Debe matchear var(--t-fast) en toast.css (animation: toast-out)
+const LEAVE_OFFSET_MS = 120;
+
 export const toast = {
   success: (msg) => show(msg, 'success'),
   error:   (msg) => show(msg, 'error'),
@@ -26,7 +29,7 @@ function show(msg, type) {
   el.setAttribute('role', type === 'error' ? 'alert' : 'status');
   el.textContent = msg;
   container.appendChild(el);
-  setTimeout(() => el.classList.add('toast--leave'), DURATIONS[type] - 300);
+  setTimeout(() => el.classList.add('toast--leave'), DURATIONS[type] - LEAVE_OFFSET_MS);
   setTimeout(() => el.remove(), DURATIONS[type]);
 }
 
