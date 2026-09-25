@@ -9,6 +9,7 @@
 import { $ } from '../../core/dom.js';
 import { subscribe } from '../../core/state.js';
 import { apiFetch } from '../../core/api.js';
+import { toast } from '../ui/toast.js';
 
 const DB_MIN = -60;
 const DB_MAX = 0;
@@ -72,7 +73,7 @@ async function fetchAndRender(widget, sourceId) {
     const meters = await apiFetch(`/preview/meters/${sourceId}`);
     renderMeters(widget, meters);
   } catch (err) {
-    console.warn('[meters] fetch failed:', err.message);
+    toast.error(`Meters no disponibles: ${err.message}`);
   }
 }
 
